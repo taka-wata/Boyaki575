@@ -6,6 +6,10 @@ public class User {
 	private String loginPass;
 	private String name;
 	
+	public User() {
+		
+	}
+	
 	
 	public User(Integer id, String loginId, String loginPass, String name) {
 		this.id =id;
