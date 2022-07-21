@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 
 public class DaoFactory {
 
-	public UserDao CreateUserDao() {
+	public static UserDao CreateUserDao() {
 		return new UserDaoImpl(getDataSource());
 	}
 
