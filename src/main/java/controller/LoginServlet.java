@@ -48,8 +48,8 @@ public class LoginServlet extends HttpServlet {
 			// セッションにloginId,nameを保存
 			request.getSession().setAttribute("loginId", user.getLoginId());
 			request.getSession().setAttribute("name", user.getName());
-			// loginDoneにリダイレクト
-			response.sendRedirect("/WEB-INF/view/home.html");
+			// boyakiにリダイレクト
+			response.sendRedirect("boyaki");
 		} else {
 			request.setAttribute("error", true);
 			request.setAttribute("errorMessage", "IDまたはパスワードが異なります。");
