@@ -15,6 +15,9 @@
         <p>名前:<input type="text" name="login_id"></p>
         <p>パスワード<input type="password" name="login_pass"></p>
         <input type="submit" value="ログイン">
+        <c:if test="${not empty error}">
+        <p><c:out value ="${errorMessage}"/></p>
+        </c:if>
     </form>
 </body>
 </html>

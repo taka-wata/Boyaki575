@@ -45,19 +45,20 @@ public class LoginServlet extends HttpServlet {
 		User user = userDao.findByLoginIdAndLoginPass(loginId, loginPass);
 		// ユーザーIDとパスワード比較
 		if(user != null) {
+			// セッションにloginId,nameを保存
 			request.getSession().setAttribute("loginId", user.getLoginId());
-			request.getSession().setAttribute("loginPass", user.getLoginPass());
+			request.getSession().setAttribute("name", user.getName());
+			// loginDoneにリダイレクト
 			response.sendRedirect("/WEB-INF/view/home.html");
 		} else {
 			request.setAttribute("error", true);
+			request.setAttribute("errorMessage", "IDまたはパスワードが異なります。");
 			request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 		}
 		} catch (Exception e) {
 			throw new ServletException(e);
 			
 		}
-		// セッションにloginIdを保存
-		// loginDoneにリダイレクト
 		
 
 	}
