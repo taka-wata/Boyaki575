@@ -11,8 +11,8 @@
 
 <form action="" method="post">
 <p>名前: <input type="text" name="name"></p>
-<p>ユーザーID: <input type="text" name="userId"></p>
-<p>パスワード: <input type="password" name="userPass"></p>
+<p>ユーザーID: <input type="text" name="loginId"></p>
+<p>パスワード: <input type="password" name="loginPass"></p>
 <p><input type="submit" value="登録"><input type="reset"></p>
 </form>
 <a href="login">ログインページに戻る</a>
