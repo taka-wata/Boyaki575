@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				if (BCrypt.checkpw(loginPass, rs.getString("login_pass")))
-				user = mapToUser(rs);
+					user = mapToUser(rs);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -70,14 +70,15 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public Integer findId(String loginId) throws Exception {
 		Integer id = null;
-		try (Connection con = ds.getConnection()){
-			String sql = "SELECT id FROM users"
-					+ " WHERE login_id=?";
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT id FROM users" + " WHERE login_id=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, loginId);
 			ResultSet rs = stmt.executeQuery();
-			id = (Integer)rs.getObject("id");
-		} catch(Exception e) {
+			if (rs.next()) {
+				id = (Integer) rs.getObject("id");
+			}
+		} catch (Exception e) {
 			throw e;
 		}
 		return id;
@@ -92,6 +93,5 @@ public class UserDaoImpl implements UserDao {
 		user.setName(rs.getString("name"));
 		return user;
 	}
-
 
 }
