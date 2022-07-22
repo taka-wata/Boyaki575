@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.BoyakiDao;
 import dao.DaoFactory;
+import dao.UserDao;
 import domain.Boyaki;
 
 /**
@@ -17,7 +18,6 @@ import domain.Boyaki;
  */
 @WebServlet("/boyakiWrite")
 public class BoyakiWriteServlet extends HttpServlet {
-	private static final String NAMELESS = "詠み人知らず";
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -41,15 +41,34 @@ public class BoyakiWriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Boyaki boyaki = new Boyaki();
 		// 値の取得
+		try {
 		boyaki.setUpper(request.getParameter("upper"));
-		boyaki.setMiddle(request.getParameter("middle"));
+		boyaki.setMiddle(request.getParameter("center"));
 		boyaki.setLower(request.getParameter("lower"));
-		boyaki.setIsSecret(Boolean.parseBoolean(request.getParameter("isSecret")));
 		
+		// チェックボックスがOnならTrue,それ以外ならfalse
+		String strIsSecret = request.getParameter("isSecret");
+		if (strIsSecret == "on") {
+			boyaki.setIsSecret(true);			
+		} else {
+			boyaki.setIsSecret(false);
+		}
+		UserDao userDao = DaoFactory.CreateUserDao();
+		// セッションからloginIdを取得し、それをもとにidを取得する
+		Integer UserId = userDao.findId((String) request.getSession().getAttribute("loginId"));
+		boyaki.setUserId(UserId);
 		// BoyakiDao作成
 		BoyakiDao boyakiDao = DaoFactory.CreateBoyakiDao();
-		
 		// ぼやきをDBに反映
+		boyakiDao.insert(boyaki);
+		
+		// フォワード
+		request.getRequestDispatcher("/WEB-INF/view/boyakiWriteDone.jsp").forward(request, response);
+		
+		} catch(Exception e) {
+			throw new ServletException(e);
+		}
+		
 	}
 
 }
