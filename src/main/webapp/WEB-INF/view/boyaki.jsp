@@ -11,6 +11,9 @@
 <title>Boyaki575</title>
 </head>
 <body>
+	<a href="writeBoyaki.html">ぼやく</a>
+	<a href="logoutDone.html">ログアウト</a>
+
 	<c:forEach items="${boyakiList}" var="boyaki">
 		<table border="1">
 			<tr>
@@ -31,7 +34,5 @@
 		<br>
 	</c:forEach>
 
-	<a href="writeBoyaki.html">ぼやく</a>
-	<a href="logoutDone.html">ログアウト</a>
 </body>
 </html>
