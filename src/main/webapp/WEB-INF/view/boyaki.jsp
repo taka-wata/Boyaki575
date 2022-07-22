@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,28 +11,21 @@
     <title>Boyaki575</title>
 </head>
 <body>
+<c:forEach items="${boyakiList}" var="boyaki">
     <table border="1">
         <tr>
             <th>作者</th>
-            <td>詠み人知らず</td>
+            <td><c:out value="${boyaki.userName }"/></td>
         </tr>
         <tr>
             <th>ぼやき</th>
-            <td>あいうえお<br>かきくけこさし<br>すせそたち</td>
+            <td><c:out value="${boyaki.upper}"/><br>
+            <c:out value="${boyaki.middle}"/><br>
+            <c:out value="${boyaki.lower}"/></td>
         </tr>
     </table>
     <br>
-    <table border="1">
-
-        <tr>
-            <th>作者</th>
-            <td>詠み人知らず</td>
-        </tr>
-        <tr>
-            <th>ぼやき</th>
-            <td>あいうえお<br>かきくけこさし<br>すせそたち</td>
-        </tr>
-    </table>
+    </c:forEach>
 
     <a href="writeBoyaki.html">ぼやく</a>
     <a href="logoutDone.html">ログアウト</a>
