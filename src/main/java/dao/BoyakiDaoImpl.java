@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +50,18 @@ public class BoyakiDaoImpl implements BoyakiDao {
 	public void insert(Boyaki boyaki) throws Exception {
 		try(Connection con = ds.getConnection()){
 			String sql = "INSERT INTO boyaki" 
-					+ " (upper, middle, lower, user_id, date)"
+					+ " (upper, middle, lower, user_id, is_secret, date)"
 					+ " VALUES"
-					+ " (?, ?, ?, ?, NOW()";
+					+ " (?, ?, ?, ?, ?, NOW())";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, boyaki.getUpper());
+			stmt.setString(2, boyaki.getMiddle());
+			stmt.setString(3, boyaki.getLower());
+			stmt.setObject(4, boyaki.getUserId(),Types.INTEGER);
+			stmt.setObject(5, boyaki.getIsSecret(),Types.BOOLEAN);
+			stmt.executeUpdate();
+		} catch(Exception e){
+			throw e;
 		}
 
 	}

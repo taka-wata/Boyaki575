@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 public class Boyaki {
 	private Integer id;
 	private String upper;
@@ -8,6 +10,7 @@ public class Boyaki {
 	private Integer userId;
 	private String userName;
 	private Boolean isSecret;
+	private Date date;
 
 	public Integer getId() {
 		return id;
@@ -64,6 +67,14 @@ public class Boyaki {
 
 	public void setIsSecret(Boolean isSecret) {
 		this.isSecret = isSecret;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }
