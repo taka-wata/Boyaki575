@@ -23,7 +23,7 @@ public class BoyakiDaoImpl implements BoyakiDao {
 		List<Boyaki> boyakiList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT" + " boyaki.id, boyaki.upper, boyaki.middle, boyaki.lower,"
-					+ " users.name AS boyaki_name," + " boyaki.user_id, is_secret"
+					+ " users.name AS user_name," + " boyaki.user_id, is_secret"
 					+ " FROM boyaki JOIN users ON boyaki.user_id = users.id";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
