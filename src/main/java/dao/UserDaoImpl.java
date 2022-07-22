@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User findById(String id) throws Exception {
+	public User findById(Integer id) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
