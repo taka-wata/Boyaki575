@@ -53,14 +53,12 @@ public class UserDaoImpl implements UserDao {
 	public User findByLoginIdAndLoginPass(String loginId, String loginPass) throws Exception {
 		User user = null;
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT (login_id, login_pass) FROM users" 
-					+ " WHERE login_id = ?";
+			String sql = "SELECT * FROM users WHERE login_id=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, loginId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				if (BCrypt.checkpw(loginPass, rs.getString("login_pass")))
-					;
 				user = mapToUser(rs);
 			}
 		} catch (Exception e) {
