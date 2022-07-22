@@ -12,11 +12,11 @@
 <body>
     よしなしごとを５７５でぼやこう！
 
-    <form action="boyakiDone.html" method="post">
-        <p>上の句: <input type="text"></p>
-        <p>中の句: <input type="text"></p>
-        <p>下の句: <input type="text"></p>
-        <p><input type="checkbox">匿名希望</p>
+    <form action="" method="post">
+        <p>上の句: <input type="text" name="upper"></p>
+        <p>中の句: <input type="text" name="center"></p>
+        <p>下の句: <input type="text" name="lower"></p>
+        <p><input type="checkbox" name="isSecert">匿名希望</p>
         <input type="submit" value="ぼやく">
         <input type="reset" value="クリア">
     </form>
