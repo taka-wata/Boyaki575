@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +10,6 @@
 </head>
 <body>
     <h1>ぼやきました。</h1>
-    <a href="boyaki.html">みんなのぼやきを見る</a>
+    <a href="boyaki">みんなのぼやきを見る</a>
 </body>
 </html>
