@@ -67,6 +67,23 @@ public class UserDaoImpl implements UserDao {
 		return user;
 	}
 
+	@Override
+	public Integer findId(String loginId) throws Exception {
+		Integer id = null;
+		try (Connection con = ds.getConnection()){
+			String sql = "SELECT id FROM users"
+					+ " WHERE login_id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, loginId);
+			ResultSet rs = stmt.executeQuery();
+			id = (Integer)rs.getObject("id");
+		} catch(Exception e) {
+			throw e;
+		}
+		return id;
+
+	}
+
 	private User mapToUser(ResultSet rs) throws Exception {
 		User user = new User();
 		user.setId((Integer) rs.getObject("id"));
@@ -75,5 +92,6 @@ public class UserDaoImpl implements UserDao {
 		user.setName(rs.getString("name"));
 		return user;
 	}
+
 
 }
