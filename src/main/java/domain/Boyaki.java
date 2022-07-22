@@ -5,7 +5,8 @@ public class Boyaki {
 	private String upper;
 	private String middle;
 	private String lower;
-	private Integer user_id;
+	private Integer userId;
+	private String userName;
 	private Boolean isSecret;
 
 	public Integer getId() {
@@ -40,12 +41,21 @@ public class Boyaki {
 		this.lower = lower;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public Boolean getIsSecret() {
