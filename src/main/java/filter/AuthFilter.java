@@ -19,14 +19,14 @@ import javax.servlet.http.HttpSession;
  */
 @WebFilter("/*")
 public class AuthFilter extends HttpFilter implements Filter {
-       
-    /**
-     * @see HttpFilter#HttpFilter()
-     */
-    public AuthFilter() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpFilter#HttpFilter()
+	 */
+	public AuthFilter() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -38,15 +38,19 @@ public class AuthFilter extends HttpFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-		
+
 		String uri = req.getRequestURI();
-		if(!uri.endsWith("/login")) {
+		if (!uri.endsWith("/login")
+				&& !uri.endsWith("/logout")
+				&& !uri.contains("/js/")
+				&& !uri.contains("/css/")) {
 			if (session.getAttribute("loginId") == null) {
 				res.sendRedirect("login");
 				return;
