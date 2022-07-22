@@ -12,6 +12,6 @@
 <body>
     <h1>ログアウト完了</h1>
     <p>ログアウト完了しました。</p>
-    <a href="login.html">再ログイン</a>
+    <a href="login">再ログイン</a>
 </body>
 </html>

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<a href="boyakiWrite">ぼやく</a>
-	<a href="logoutDone.html">ログアウト</a>
+	<a href="logout">ログアウト</a>
 
 	<c:forEach items="${boyakiList}" var="boyaki">
 		<table border="1">
