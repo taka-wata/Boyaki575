@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -29,15 +30,15 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User findById(Integer id) throws Exception {
 		User user = new User();
-		try(Connection con =ds.getConnection()){
+		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT * FROM users WHERE id=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, id, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next() != false) {
+			if (rs.next() != false) {
 				user = mapToUser(rs);
 			}
-			
+
 		} catch (Exception e) {
 			throw e;
 		}
@@ -46,18 +47,15 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void insert(User user) throws Exception {
-		try(Connection con = ds.getConnection()){
-			String sql = "INSERT INTO users"
-					+ " (login_id, login_pass, name)"
-					+ " VALUES"
-					+ " (?, ?, ?)";
+		try (Connection con = ds.getConnection()) {
+			String sql = "INSERT INTO users" + " (login_id, login_pass, name)" + " VALUES" + " (?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, user.getLoginId());
 			stmt.setString(2, user.getLoginPass());
 			stmt.setString(3, user.getName());
 			stmt.executeUpdate();
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			throw e;
 		}
 
@@ -111,12 +109,29 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+	@Override
+	public void updateGoodTime(Integer id, Date date) throws Exception {
+		try (Connection con = ds.getConnection()) {
+			String sql = "UPDATE users"
+					+ " SET good_time= now()"
+					+ " WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id, Types.INTEGER);
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
 	private User mapToUser(ResultSet rs) throws Exception {
 		User user = new User();
 		user.setId((Integer) rs.getObject("id"));
 		user.setLoginId(rs.getString("login_id"));
 		user.setLoginPass(rs.getString("login_pass"));
 		user.setName(rs.getString("name"));
+		user.setGoodTime(rs.getTimestamp("good_time"));
 		return user;
 	}
 

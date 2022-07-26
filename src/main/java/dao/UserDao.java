@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import domain.User;
@@ -12,5 +13,6 @@ public interface UserDao {
 	public void delete(User user) throws Exception;
 	public User findByLoginIdAndLoginPass(String loginId, String loginPass) throws Exception;
 	public Integer findId(String loginId) throws Exception;
+	public void updateGoodTime(Integer id, Date date) throws Exception;
 
 }

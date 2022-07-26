@@ -10,5 +10,6 @@ public interface BoyakiDao {
 	public void insert(Boyaki boyaki) throws Exception;
 	public void update(Boyaki boyaki) throws Exception;
 	public void delete(Boyaki boyaki) throws Exception;
+	public void addGoodsCount(Integer id, Integer goodsCount) throws Exception;
 
 }
