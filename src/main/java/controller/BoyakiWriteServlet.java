@@ -66,8 +66,8 @@ public class BoyakiWriteServlet extends HttpServlet {
 			if (middle.isBlank()) {
 				request.setAttribute("middleErrorMessage", "中の句が未入力です");
 				isError = true;
-			} else if (middle.length() < 4 || middle.length() >= 8) {
-				request.setAttribute("middleErrorMessage", "中の句は6文字以上8文字以内で入力してください。");
+			} else if (middle.length() < 5 || middle.length() >= 8) {
+				request.setAttribute("middleErrorMessage", "中の句は5文字以上8文字以内で入力してください。");
 				isError = true;
 			}
 
@@ -78,14 +78,13 @@ public class BoyakiWriteServlet extends HttpServlet {
 				request.setAttribute("lowerErrorMessage", "下の句は4文字以上6文字以内で入力してください。");
 				isError = true;
 			}
-
-			// チェックボックスがOnならTrue,それ以外ならfalse
 			String strIsSecret = request.getParameter("isSecret");
-			if (strIsSecret == "on") {
-				boyaki.setIsSecret(true);
-			} else {
-				boyaki.setIsSecret(false);
+			Boolean isSecret = false;
+			if (strIsSecret.equals("true")) {
+				isSecret = true;
 			}
+			boyaki.setIsSecret(isSecret);
+			
 			// error検出時、処理を中断しフォワード
 			if (isError == true) {
 				request.getRequestDispatcher("/WEB-INF/view/writeBoyaki.jsp").forward(request, response);
