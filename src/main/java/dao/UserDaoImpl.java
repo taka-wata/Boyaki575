@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -27,8 +28,20 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		User user = new User();
+		try(Connection con =ds.getConnection()){
+			String sql = "SELECT * FROM users WHERE id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id, Types.INTEGER);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next() != false) {
+				user = mapToUser(rs);
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		}
+		return user;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class BoyakiDaoImpl implements BoyakiDao {
 		List<Boyaki> boyakiList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT" + " boyaki.id, boyaki.upper, boyaki.middle, boyaki.lower,"
-					+ " users.name AS user_name," + " boyaki.user_id, is_secret, boyaki.date"
+					+ " users.name AS user_name," + " boyaki.user_id, is_secret, boyaki.date, boyaki.goods_count"
 					+ " FROM boyaki JOIN users ON boyaki.user_id = users.id"
 					+ " ORDER BY id DESC;";
 			
@@ -42,8 +42,23 @@ public class BoyakiDaoImpl implements BoyakiDao {
 
 	@Override
 	public Boyaki findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		Boyaki boyaki = new Boyaki();
+		try(Connection con= ds.getConnection()){
+			String sql = "SELECT" + " boyaki.id, boyaki.upper, boyaki.middle, boyaki.lower,"
+					+ " users.name AS user_name," + " boyaki.user_id, is_secret, boyaki.date, boyaki.goods_count"
+					+ " FROM boyaki JOIN users ON boyaki.user_id = users.id"
+					+ " WHERE boyaki.id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id, Types.INTEGER);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next() != false) {
+				boyaki = mapToBoyaki(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return boyaki;
 	}
 
 	@Override
