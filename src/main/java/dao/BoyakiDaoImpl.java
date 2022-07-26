@@ -41,7 +41,7 @@ public class BoyakiDaoImpl implements BoyakiDao {
 	}
 
 	@Override
-	public Boyaki findById(String id) throws Exception {
+	public Boyaki findById(Integer id) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
