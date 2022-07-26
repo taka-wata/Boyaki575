@@ -1,10 +1,13 @@
 package domain;
 
+import java.util.Date;
+
 public class User {
 	private Integer id;
 	private String loginId;
 	private String loginPass;
 	private String name;
+	private Date goodTime;
 	
 	public User() {
 		
@@ -41,6 +44,16 @@ public class User {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public Date getGoodTime() {
+		return goodTime;
+	}
+
+
+	public void setGoodTime(Date goodTime) {
+		this.goodTime = goodTime;
 	}
 
 }

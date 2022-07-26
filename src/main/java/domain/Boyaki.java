@@ -11,6 +11,7 @@ public class Boyaki {
 	private String userName;
 	private Boolean isSecret;
 	private Date date;
+	private Integer goodsCount;
 
 	public Integer getId() {
 		return id;
@@ -75,6 +76,14 @@ public class Boyaki {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Integer getGoodsCount() {
+		return goodsCount;
+	}
+
+	public void setGoodsCount(Integer goodsCount) {
+		this.goodsCount = goodsCount;
 	}
 
 }
