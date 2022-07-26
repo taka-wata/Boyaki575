@@ -58,7 +58,7 @@ public class BoyakiWriteServlet extends HttpServlet {
 			if (upper.isBlank()) {
 				request.setAttribute("upperErrorMessage", "上の句が未入力です");
 				isError = true;
-			} else if (upper.length() < 4 || upper.length() >= 6) {
+			} else if (upper.length() < 4 || upper.length() > 6) {
 				request.setAttribute("upperErrorMessage", "上の句は4文字以上6文字以内で入力してください。");
 				isError = true;
 			}
@@ -66,7 +66,7 @@ public class BoyakiWriteServlet extends HttpServlet {
 			if (middle.isBlank()) {
 				request.setAttribute("middleErrorMessage", "中の句が未入力です");
 				isError = true;
-			} else if (middle.length() < 5 || middle.length() >= 8) {
+			} else if (middle.length() < 5 || middle.length() > 8) {
 				request.setAttribute("middleErrorMessage", "中の句は5文字以上8文字以内で入力してください。");
 				isError = true;
 			}
@@ -74,7 +74,7 @@ public class BoyakiWriteServlet extends HttpServlet {
 			if (lower.isBlank()) {
 				request.setAttribute("lowerErrorMessage", "下の句が未入力です");
 				isError = true;
-			} else if (lower.length() < 4 || lower.length() >= 6) {
+			} else if (lower.length() < 4 || lower.length() > 6) {
 				request.setAttribute("lowerErrorMessage", "下の句は4文字以上6文字以内で入力してください。");
 				isError = true;
 			}
