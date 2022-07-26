@@ -30,6 +30,22 @@
 						value="${boyaki.middle}" /><br> <c:out
 						value="${boyaki.lower}" /></td>
 			</tr>
+			<tr>
+				<th>いいね！</th>
+				<td><c:out value="${boyaki.goodsCount}" />
+						<form action="" method="post">
+						<c:choose>
+							<c:when test="${goodIsPossible == true}">
+								<button type="submit" name="goodId" value="${boyaki.id}">いいね！</button>
+							</c:when>
+							<c:otherwise>
+								<button type="submit" name="goodId" value="${boyaki.id}"
+									disabled="disabled">いいね！</button>
+							</c:otherwise>
+					</c:choose>
+					</form>
+					</td>
+			</tr>
 		</table>
 		<br>
 	</c:forEach>
