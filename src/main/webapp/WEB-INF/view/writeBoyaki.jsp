@@ -39,7 +39,7 @@
 			</p>
 		</c:if>
 		<p>
-			<input type="checkbox" name="isSecert" >匿名希望
+			<input type="checkbox" name="isSecret" value="true" >匿名希望
 		</p>
 		<input type="submit" value="ぼやく"> <input type="reset"
 			value="クリア">

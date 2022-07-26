@@ -18,7 +18,16 @@
 		<table border="1">
 			<tr>
 				<th>作者</th>
-				<td><c:out value="${boyaki.userName }" /></td>
+				<td>
+				<c:choose>
+				<c:when test="${boyaki.isSecret == false }">
+				<c:out value="${boyaki.userName}" />
+				</c:when>
+				<c:otherwise>
+				詠み人知らず
+				</c:otherwise>
+				</c:choose>
+				</td>
 			</tr>
 			<tr>
 				<th>日時</th>
