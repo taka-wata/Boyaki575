@@ -63,7 +63,7 @@ public class BoyakiDaoImpl implements BoyakiDao {
 	public void insert(Boyaki boyaki) throws Exception {
 		try (Connection con = ds.getConnection()) {
 			String sql = "INSERT INTO boyaki" + " (upper, middle, lower, user_id, is_secret, date, goods_count)"
-					+ " VALUES" + " (?, ?, ?, ?, ?, NOW()),0 ";
+					+ " VALUES" + " (?, ?, ?, ?, ?, NOW(), 0)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, boyaki.getUpper());
 			stmt.setString(2, boyaki.getMiddle());
