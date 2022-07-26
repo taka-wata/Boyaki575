@@ -35,5 +35,6 @@
 			</p>
 		</c:if>
 	</form>
+	<a href="userAdd">新規登録</a>
 </body>
 </html>
