@@ -41,7 +41,8 @@
 		<p>
 			<input type="checkbox" name="isSecret" value="true" >匿名希望
 		</p>
-		<input type="submit" value="ぼやく"> <input type="reset"
+		<button type="submit" name="button" value="write">ぼやく</button>
+		<button type="submit" name="button" value="random">ランダム</button><input type="reset"
 			value="クリア">
 	</form>
 </body>
