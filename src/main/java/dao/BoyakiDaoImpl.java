@@ -104,6 +104,22 @@ public class BoyakiDaoImpl implements BoyakiDao {
 
 	}
 
+	@Override
+	public Integer getCount() throws Exception {
+		Integer count = null;
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT COUNT(*) AS boyaki_count FROM boyaki";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next() != false) {
+				count = Integer.parseInt(rs.getObject("boyaki_count").toString());
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return count;
+	}
+
 	private Boyaki mapToBoyaki(ResultSet rs) throws Exception {
 		Boyaki boyaki = new Boyaki();
 		boyaki.setId((Integer) rs.getObject("id"));
