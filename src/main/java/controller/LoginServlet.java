@@ -44,14 +44,14 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Boolean isError = false;
 		// 入力情報の取得・バリデーション
-		String loginId = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		request.setAttribute("loginId", loginId);
 
 		if (loginId.isBlank()) {
 			request.setAttribute("loginIdErrorMessage", "ログインIDが未入力です");
 			isError = true;
 		}
-		String loginPass = request.getParameter("login_pass");
+		String loginPass = request.getParameter("loginPass");
 		if (loginPass.isBlank()) {
 			request.setAttribute("loginPassErrorMessage", "ログインパスワードが未入力です");
 			isError = true;
