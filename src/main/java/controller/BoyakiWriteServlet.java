@@ -60,27 +60,28 @@ public class BoyakiWriteServlet extends HttpServlet {
 				if (upper.isBlank()) {
 					request.setAttribute("upperErrorMessage", "上の句が未入力です");
 					isError = true;
-				} else if (upper.length() < 4 || upper.length() > 6) {
-					request.setAttribute("upperErrorMessage", "上の句は4文字以上6文字以内で入力してください。");
+				} else if (upper.length() > 6) {
+					request.setAttribute("upperErrorMessage", "上の句は6文字以内で入力してください。");
 					isError = true;
 				}
 
 				if (middle.isBlank()) {
 					request.setAttribute("middleErrorMessage", "中の句が未入力です");
 					isError = true;
-				} else if (middle.length() < 5 || middle.length() > 8) {
-					request.setAttribute("middleErrorMessage", "中の句は5文字以上8文字以内で入力してください。");
+				} else if (middle.length() > 8) {
+					request.setAttribute("middleErrorMessage", "中の句は8文字以内で入力してください。");
 					isError = true;
 				}
 
 				if (lower.isBlank()) {
 					request.setAttribute("lowerErrorMessage", "下の句が未入力です");
 					isError = true;
-				} else if (lower.length() < 4 || lower.length() > 6) {
-					request.setAttribute("lowerErrorMessage", "下の句は4文字以上6文字以内で入力してください。");
+				} else if (lower.length() > 6) {
+					request.setAttribute("lowerErrorMessage", "下の句は6文字以内で入力してください。");
 					isError = true;
 				}
-				String strIsSecret = request.getParameter("isSecret");
+
+				String strIsSecret = request.getParameter("nameIsSecret");
 				Boolean isSecret = false;
 				if (strIsSecret.equals("true")) {
 					isSecret = true;
@@ -119,25 +120,25 @@ public class BoyakiWriteServlet extends HttpServlet {
 				BoyakiDao boyakiDao = DaoFactory.CreateBoyakiDao();
 				// ぼやき総数を取得
 				Integer count = boyakiDao.getCount();
-				
+
 				// １～countまでの乱数生成
-				Integer randomUpperId = (int)((Math.random() * count) + 1);
-				Integer randomMiddleId = (int)((Math.random() * count) + 1);
-				Integer randomLowerId =  (int)((Math.random() * count) + 1);
-				
+				Integer randomUpperId = (int) ((Math.random() * count) + 1);
+				Integer randomMiddleId = (int) ((Math.random() * count) + 1);
+				Integer randomLowerId = (int) ((Math.random() * count) + 1);
+
 				// 乱数に対応した上の句、中の句、下の句を取得
 				String upper = boyakiDao.findById(randomUpperId).getUpper();
 				String middle = boyakiDao.findById(randomMiddleId).getMiddle();
 				String lower = boyakiDao.findById(randomLowerId).getLower();
-				
+
 				// セッションに格納
 				request.setAttribute("upper", upper);
 				request.setAttribute("middle", middle);
 				request.setAttribute("lower", lower);
-				
+
 				// フォワード
 				request.getRequestDispatcher("/WEB-INF/view/writeBoyaki.jsp").forward(request, response);
-				
+
 			} catch (Exception e) {
 				throw new ServletException(e);
 
