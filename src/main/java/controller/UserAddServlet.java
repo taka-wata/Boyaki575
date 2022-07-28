@@ -46,13 +46,47 @@ public class UserAddServlet extends HttpServlet {
 			throws ServletException, IOException {
 		User user = new User();
 		try {
+			// バリデーション処理
+			Boolean isError = false;
+			UserDao userDao = DaoFactory.CreateUserDao();
+			// 入力情報の取得・バリデーション
+			String loginId = request.getParameter("loginId");
+			request.setAttribute("loginId", loginId);
+
+			if (loginId.isBlank()) {
+				request.setAttribute("loginIdErrorMessage", "ログインIDが未入力です");
+				isError = true;
+			}
+			if (userDao.findId(loginId) != null ) {
+				request.setAttribute("loginIdErrorMessage", "ログインIDが重複しています");
+				isError = true;
+			}
+			
+			String loginPass = request.getParameter("loginPass");
+			if (loginPass.isBlank()) {
+				request.setAttribute("loginPassErrorMessage", "ログインパスワードが未入力です");
+				isError = true;
+			}
+			
+			String name = request.getParameter("name");
+			if (name.isBlank()) {
+				request.setAttribute("nameErrorMessage", "名前が未入力です");
+				isError = true;
+			}
+			
+			// ログインID・パスワード・名前が未入力の場合は処理を中断
+			if(isError == true) {
+				request.getRequestDispatcher("/WEB-INF/view/userAdd.jsp").forward(request, response);
+				return;
+			}
+			// 入力済の場合、処理を続行
+
 			user.setLoginId(request.getParameter("loginId"));
 			// PW暗号化
 			String hashed = BCrypt.hashpw(request.getParameter("loginPass"), BCrypt.gensalt());
 			user.setLoginPass(hashed);
 			user.setName(request.getParameter("name"));
 			// UserDao作成
-			UserDao userDao = DaoFactory.CreateUserDao();
 			userDao.insert(user);
 			
 			// ログイン処理
