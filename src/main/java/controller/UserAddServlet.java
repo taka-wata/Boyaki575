@@ -54,28 +54,34 @@ public class UserAddServlet extends HttpServlet {
 			request.setAttribute("loginId", loginId);
 
 			if (loginId.isBlank()) {
-				request.setAttribute("loginIdErrorMessage", "ログインIDが未入力です");
+				request.setAttribute("loginIdErrorMessage", "ユーザーIDが未入力です");
+				isError = true;
+			} else if (loginId.length() > 20) {
+				request.setAttribute("loginIdErrorMessage", "ユーザーIDは20文字以内で入力してください。");
+				isError = true;
+				// loginIdからidが取得できたら重複エラーを返す
+			} else if (userDao.findId(loginId) != null) {
+				request.setAttribute("loginIdErrorMessage", "ユーザーIDが重複しています");
 				isError = true;
 			}
-			if (userDao.findId(loginId) != null ) {
-				request.setAttribute("loginIdErrorMessage", "ログインIDが重複しています");
-				isError = true;
-			}
-			
+
 			String loginPass = request.getParameter("loginPass");
 			if (loginPass.isBlank()) {
 				request.setAttribute("loginPassErrorMessage", "ログインパスワードが未入力です");
 				isError = true;
 			}
-			
+
 			String name = request.getParameter("name");
 			if (name.isBlank()) {
 				request.setAttribute("nameErrorMessage", "名前が未入力です");
 				isError = true;
+			} else if (name.length() > 20) {
+				request.setAttribute("nameErrorMessage", "名前は20文字以内で入力してください。");
+				isError = true;
 			}
-			
+
 			// ログインID・パスワード・名前が未入力の場合は処理を中断
-			if(isError == true) {
+			if (isError == true) {
 				request.getRequestDispatcher("/WEB-INF/view/userAdd.jsp").forward(request, response);
 				return;
 			}
@@ -88,7 +94,7 @@ public class UserAddServlet extends HttpServlet {
 			user.setName(request.getParameter("name"));
 			// UserDao作成
 			userDao.insert(user);
-			
+
 			// ログイン処理
 			request.getSession().setAttribute("loginId", user.getLoginId());
 			request.getSession().setAttribute("name", user.getName());
