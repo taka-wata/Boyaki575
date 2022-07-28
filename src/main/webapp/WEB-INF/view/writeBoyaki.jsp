@@ -46,8 +46,7 @@
 			<input type="radio" name="nameIsSecret" value="false" checked>いいえ
 		</p>
 		<button type="submit" name="button" value="write">ぼやく</button>
-		<button type="submit" name="button" value="random">ランダム</button><input type="reset"
-			value="クリア">
+		<button type="submit" name="button" value="random">ランダム</button>
 	</form>
 	<script src="js/bootstrap.bundle.min.js"></script>
 </body>

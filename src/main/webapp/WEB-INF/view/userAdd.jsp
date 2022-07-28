@@ -22,7 +22,7 @@
           <c:if test="${not empty loginPassErrorMessage}">
             <p><c:out value="${loginPassErrorMessage}" /></p>
         </c:if>
-<p><input type="submit" value="登録"><input type="reset"></p>
+<p><input type="submit" value="登録"></p>
 </form>
 <a href="login">ログインページに戻る</a>
 </body>
