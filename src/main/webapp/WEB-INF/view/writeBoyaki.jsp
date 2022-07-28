@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
 <title>Boyaki575</title>
 </head>
 <body>
@@ -39,11 +41,14 @@
 			</p>
 		</c:if>
 		<p>
-			<input type="checkbox" name="isSecret" value="true" >匿名希望
+			匿名希望
+			<input type="radio" name="nameIsSecret" value="true" >はい
+			<input type="radio" name="nameIsSecret" value="false" checked>いいえ
 		</p>
 		<button type="submit" name="button" value="write">ぼやく</button>
 		<button type="submit" name="button" value="random">ランダム</button><input type="reset"
 			value="クリア">
 	</form>
+	<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
